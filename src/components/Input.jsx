@@ -46,11 +46,13 @@ export default function Input() {
       text,
       profileImg: session.user.image,
       timestamp: serverTimestamp(),
+      image: imageFileUrl,
     });
     setPostLoading(false);
     setText("");
     setImageFileUrl(null);
     setSelectedFile(null);
+    location.reload();
   };
   useEffect(() => {
     if (selectedFile) {
@@ -79,7 +81,7 @@ export default function Input() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          getDownloadURL(downloadURL);
+          setImageFileUrl(downloadURL);
           setImageFileUploading(false);
         });
       }
